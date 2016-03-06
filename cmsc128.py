@@ -1,3 +1,12 @@
+#Colin James P. Naranjo
+#CMSC128 AB-4L
+#Programming Assignment 002
+#Notes:
+#For running a function, simply type:
+#python cmsc128.py functionname(functionarguments)
+#Strings are enclosed with single quotes
+
+
 import sys
 import re #For importing regex
 
@@ -28,7 +37,7 @@ def isValidString(str, alphabet):
 
 def getSkew(str, n):								#Returns the number of Gs minus the number of Cs
 	if(len(str) > 0):								#Checks if string length and n is greater than 0
-		if(n > 0 || n > len(str)):
+		if(n > 0 and n < len(str)+1):
 			g = 0
 			c = 0
 			for index in range(n):
@@ -42,16 +51,29 @@ def getSkew(str, n):								#Returns the number of Gs minus the number of Cs
 
 def getMaxSkewN(str, n):
 	if(len(str) > 0):								#Checks if string length and n is greater than 0
-		if(n > 0 || n > len(str)):
+		if(n > 0 and n < len(str)+1):
 			g = 0
-			c = 0
-			for index in range(len(str)):
-				if(str[index] == 'G'): g+=1			#Gets all Gs in the string
-			for index in range(n):					#Gets all Cs from the string up to nth index then returns difference
-				if(str[index] == 'C'): c+=1
-			return print(g-c)						
+			for index in range(n):
+				if(str[index] == 'G'): g+=1			#Gets all Gs in the string, which will be the maximum value of Gs
+			return print(g)						
 		else:
 			print("Second parameter is invalid!")
 	else:
 		print("Strings must be greater than 0 in length!")
-eval(sys.argv[1])
+
+def getMinSkewN(str, n):
+	if(len(str) > 0):								#Checks if string length and n is greater than 0
+		if(n > 0 and n < len(str)+1):
+			g = 0
+			c = 0
+			for index in range(n):
+				if(str[index] == 'G'): g+=1			#Gets all Gs and Cs from the string up to nth index then returns difference
+				if(str[index] == 'C'): c+=1
+			if(g-c > 1): return print(1)			#If greater than 1, it returns the minimum value which is 1
+			else: return print(g-c)				
+		else:
+			print("Second parameter is invalid!")
+	else:
+		print("Strings must be greater than 0 in length!")
+
+eval(sys.argv[1])									#Evaluates the argument value when running code
